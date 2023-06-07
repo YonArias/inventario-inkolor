@@ -13,7 +13,19 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Inicio') }}
+                    </x-nav-link>
+                    <x-nav-link href="/sales" :active="request()->routeIs('sales')">
+                        {{ __('Ventas') }}
+                    </x-nav-link>
+                    <x-nav-link href="/warehouse" :active="request()->routeIs('warehouse')">
+                        {{ __('Almacen') }}
+                    </x-nav-link>
+                    <x-nav-link href="/reports" :active="request()->routeIs('reports')">
+                        {{ __('Reportes') }}
+                    </x-nav-link>
+                    <x-nav-link href="/users" :active="request()->routeIs('users')">
+                        {{ __('Usuarios') }}
                     </x-nav-link>
                 </div>
             </div>
