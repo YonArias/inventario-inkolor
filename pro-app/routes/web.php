@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,8 +28,13 @@ Route::get('/sales', function () {
     return view('sales');
 })->middleware(['auth', 'verified'])->name('sales');
 
-Route::get('/warehouse', function () {
-    return view('warehouse');
+Route::controller(ProductsController::class)->group(function () {
+    Route::get('/warehouse', "show");
+    Route::get('/warehouse/create', "create");
+    Route::post('/warehouse', "store");
+    Route::get('/warehouse/{id}/edit', "edit");
+    Route::patch('/warehouse/{id}', "update");
+    Route::delete('/warehouse/{id}', "destroy");
 })->middleware(['auth', 'verified'])->name('warehouse');
 
 Route::get('/reports', function () {
