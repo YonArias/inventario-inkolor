@@ -108,8 +108,8 @@
         <div class="mt-10 flex justify-between">
             <a href="/warehouse/create" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 focus:ring-4 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Crear pedido</a>
 
-            <div class="flex">
-                <label for="disabled_outlined" class="mb-2 text-xm font-medium text-gray-900 dark:text-white">Total: </label>
+            <div class="flex items-center">
+                <label for="disabled_outlined" class="mr-6 text-xm font-medium text-gray-900 dark:text-white">Total: </label>
                 <input type="text" id="disabled_outlined" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " disabled value={{ count($products) }} />
             </div>
         </div>

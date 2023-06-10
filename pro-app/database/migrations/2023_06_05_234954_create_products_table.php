@@ -21,6 +21,7 @@ return new class extends Migration
             $table->dateTime('date_manufacture');
             $table->dateTime('date_expiration')->nullable();
             $table->integer('state');
+            
 
             // Claves foraneas
             $table->unsignedBigInteger('mark_id');
