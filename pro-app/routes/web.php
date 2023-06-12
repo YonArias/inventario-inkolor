@@ -6,6 +6,8 @@ use App\Http\Controllers\SalesController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Sale_detail;
 use App\Models\Product;
+use App\Models\Sale;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +25,16 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $sales = Sale::get();
+    $products = Product::get();
+    $users = User::get();
+    $detail_sales = Sale_detail::get();
+    return view('dashboard')->with([
+        'sales' => $sales,
+        'products' => $products,
+        'users' => $users,
+        'details' => $detail_sales
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // RUTAS NUEVAS PARA LOS NUEVAS SECCIONES
@@ -44,7 +55,7 @@ Route::get('/detail/delete/{detail}', function (Sale_detail $detail) {
     foreach ($products as $product){
         if($product->id == $producto_id) {
             $product->update([
-                'stock' => $product->stock + (int)$detail->amount
+                'stock' => $product->stock + (int)$detail->amount,
             ]);
         }
     }
