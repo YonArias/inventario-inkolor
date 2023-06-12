@@ -13,24 +13,23 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->integer('amount');
-            $table->integer('sub_total');
+            $table->integer('total');
 
             // Claves foraneas
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('voucher_id');
 
             $table->timestamps();
 
             // Configurar Foraneas
-            $table->foreign('order_id')
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('orders')
+                ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('product_id')
+            $table->foreign('voucher_id')
                 ->references('id')
-                ->on('products')
+                ->on('vouchers')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });

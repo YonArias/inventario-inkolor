@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SalesController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Sale_detail;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +27,33 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // RUTAS NUEVAS PARA LOS NUEVAS SECCIONES
-Route::get('/sales', function () {
-    return view('sales');
-})->middleware(['auth', 'verified'])->name('sales');
+Route::controller(SalesController::class)->group(function () {
+    Route::get('/api/data', 'index');
+    Route::get('/sales', "show");
+    Route::get('/sales/create', "create");
+    Route::post('/sales', "store");
+    Route::get('/sales/{sale}/edit', "edit");
+    Route::patch('/sales/{sale}', "update");
+    Route::delete('/sales/{sale}', "destroy");
+})->middleware(['auth', 'verified'])->name('warehouse');
+
+Route::get('/detail/delete/{detail}', function (Sale_detail $detail) {
+    $products = Product::get();
+    $producto_id = $detail->product_id;
+
+    foreach ($products as $product){
+        if($product->id == $producto_id) {
+            $product->update([
+                'stock' => $product->stock + (int)$detail->amount
+            ]);
+        }
+    }
+
+    $detail->delete();
+
+    $cadena = "/sales/ " . $detail->sale_id . " /edit/";
+    return redirect($cadena);
+});
 
 Route::controller(ProductsController::class)->group(function () {
     Route::get('/warehouse', "show");
