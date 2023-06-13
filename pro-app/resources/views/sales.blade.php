@@ -52,8 +52,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{ $i = 1 }}
-                    {{ $total = 0 }}
+                    @php $i = 1 @endphp
+                    @php $total = 0 @endphp
                     @foreach ($details as $detail)
                         @if ($sale->id == $detail->sale_id)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -97,8 +97,8 @@
                                     </form>
                                 </td>
                             </tr>
-                            {{ $total = $total + $detail->sub_total }}
-                            {{ $i += 1 }}
+                            @php $total = $total + $detail->sub_total @endphp
+                            @php $i += 1 @endphp
                         @endif
                     @endforeach
                 </tbody>

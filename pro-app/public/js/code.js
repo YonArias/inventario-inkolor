@@ -40,6 +40,22 @@ function BuscarProducto() {
         console.error('Error:', error);
     });
 }
+
+function MostrarTabla(table1, table2) {
+    console.log('ReporteVenta')
+
+    var table_sale = document.getElementById(table1)
+    var table_order = document.getElementById(table2)
+
+    table_sale.style.display = 'null'
+    table_order.style.display = 'none'
+}
+
+function ReporteCompra() {
+    console.log('ReporteCompra')
+
+}
+
 // Obtener el elemento select
 /*
 var selectElement = document.getElementById('voucher');

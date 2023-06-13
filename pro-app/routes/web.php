@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\ReportsController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Sale_detail;
 use App\Models\Product;
@@ -46,7 +47,7 @@ Route::controller(SalesController::class)->group(function () {
     Route::get('/sales/{sale}/edit', "edit");
     Route::patch('/sales/{sale}', "update");
     Route::delete('/sales/{sale}', "destroy");
-})->middleware(['auth', 'verified'])->name('warehouse');
+})->middleware(['auth', 'verified'])->name('sales');
 
 Route::get('/detail/delete/{detail}', function (Sale_detail $detail) {
     $products = Product::get();
@@ -75,8 +76,11 @@ Route::controller(ProductsController::class)->group(function () {
     Route::delete('/warehouse/{id}', "destroy");
 })->middleware(['auth', 'verified'])->name('warehouse');
 
-Route::get('/reports', function () {
-    return view('reports');
+Route::controller(ReportsController::class)->group(function () {
+    Route::get('/reports', "index");
+    Route::get('/reports/create', "create");
+    Route::get('/reports/{table}', "show");
+    Route::post('/reports', "store");
 })->middleware(['auth', 'verified'])->name('reports');
 
 Route::get('/users', function () {
